@@ -1,4 +1,4 @@
-# Mini_Pet_8266_OLED  
+# Mini_Pet_8266_OLED  [![Build Status](https://api.travis-ci.org/CowboyWill/Mini_Pet_8266_OLED.svg?branch=master)](https://travis-ci.org/CowboyWill/Mini_Pet_8266_OLED)
 
 This is a new version of the Mini Commodore Pet that I customized from several resources.  I used the WeMos ESP8266 board with built in battery and the SH1106 LCD board. 
 
