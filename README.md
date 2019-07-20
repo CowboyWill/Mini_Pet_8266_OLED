@@ -2,7 +2,7 @@
 
 This is a new version of the Mini Commodore Pet that I customized from several resources.  I used the WeMos ESP8266 board with built in battery and the SH1106 LCD board. 
 
-###Materials I used include:
+### Materials I used include:
 
 * _Wemos D1 Mini WiFi Module ESP WROOM 02 Motherboard Integrated ESP8266 with 18650_ - [Amazon](https://www.amazon.com/gp/product/B075H8X7H2)
 * _18650 Lithium Rechargeable battery_ 

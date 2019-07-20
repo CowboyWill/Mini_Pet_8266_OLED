@@ -19,7 +19,7 @@ before_install:
    - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
 
 install:
-   - arduino --install-library "NTPClient","ArduinoJson", "AutoConnect", "ESP8266 and ESP32 Oled Driver for SSD1306", "json-streaming-parser"
+   - arduino --install-library "PageBuilder", "NTPClient","ArduinoJson", "AutoConnect", "esp8266-oled-ssd1306", "json-streaming-parser"
 
 script:
    - build_main_platforms

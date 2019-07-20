@@ -8,10 +8,10 @@
     Will Travis
  
   Date:
-    07/05/2019
+    07/20/2019
  
   Version: 
-    0.2
+    0.4
   
   See Also:
     See instruction file for hookup information.
@@ -33,16 +33,6 @@
     - Avoiding the use of defines as much as possible.
     - Using const instead of define.
 
-  ToDo:
-    - OTA Update - Not working
-    - Weather
-    - Overlay
-    - Overlay - WiFi strength
-    - 
-  COMPLETED:
-    - WiFi AutoConnect
-    - Animation of display screens
-    - NTP time
  *****************************************************************************/
 
 /****************************************************************************
@@ -61,18 +51,29 @@
  *   OpenWeatherMapCurrent.h  - Current weather with OpenWeatherMap API
  *   OpenWeatherMapForecast.h - Weather forecast with OpenWeatherMap API
  ****************************************************************************/
+// Wi-Fi Libraries
 #include <ESP8266WiFi.h>
-#include <WiFiUdp.h>
-#include <SH1106Wire.h>
-#include <ArduinoJson.h>
-#include <Ticker.h>
-#include <ArduinoOTA.h>
 #include <ESP8266WebServer.h>
 #include <AutoConnect.h>
+//#include <ArduinoJson.h>   // Only needed if using custom web pages
+//#include <WiFiUdp.h>   // Not needed for AutoConnect
+
+// OLED Libraries
+#include <SH1106Wire.h>
+#include <OLEDDisplayUi.h>
+
+// Over the Air Update library
+#include <ArduinoOTA.h>
+
+// OpenWeatherMap is a free API service
 #include <OpenWeatherMapCurrent.h>
 #include <OpenWeatherMapForecast.h>
+#include <Ticker.h>       // Used to time weather updates
+
+// customized NTP client, BUT USE ORIGINAL LIBRARY
 #include "NTPClient.h"
-#include "OLEDDisplayUi.h"
+
+// Local Libraries
 #include "Mini_Pet_8266_OLED.h"
 #include "images.h"
 #include "fonts.h"
@@ -106,18 +107,14 @@ Ticker ticker;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", TIMEZONE*60*60);  // offset in seconds
 
+// Setup Wi-Fi
 ESP8266WebServer Server; 
 AutoConnect Portal(Server);
+AutoConnectConfig  Config;
 
 // Current Weather 
 OpenWeatherMapCurrent currentWeatherClient;
 OpenWeatherMapCurrentData currentWeather;
-
-/***************NOT WORKING ****************
-AutoConnectConfig  Config;
-Config.hostName = hostname;
-Portal.config(Config);
-*******************************************/
 
 // This array keeps function pointers to all frames
 // frames are the single panels that slide in 
@@ -163,24 +160,19 @@ void setup() {
   display.drawString(CENTER_X, 0, "Connecting to");
   display.drawXbm(34, 20, WiFi_Logo_width, WiFi_Logo_height, WiFi_Logo_bits);
   display.display();
-  
+
+  // AutoConnect settings  
+  Config.hostName = HOSTNAME;
+  Portal.config(Config);   
+
   Server.on("/", rootPage);
   if (Portal.begin()) {
-    /*
-    WiFi.begin(ssid, ssid_password);
-    Serial.println("wi fi setup");
-    
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-    }
-    */
     Serial.println("WiFi connected: " + WiFi.localIP().toString());
 
     display.clear();
     display.setTextAlignment(TEXT_ALIGN_CENTER);
     display.drawString(CENTER_X, 0, "WiFi connected");
     display.drawString(CENTER_X, 20, WiFi.localIP().toString());  
-    // ****************************************************************display.drawString(CENTER_X, 40, ssid);
     display.display();
 
   }

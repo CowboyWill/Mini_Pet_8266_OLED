@@ -1,0 +1,28 @@
+Mini_Pet_8266_OLED .06 - ??????
+TODO:
+  - NTPClient - use original library (use date from Weather)
+  - OTA Update - Not working
+
+
+Mini_Pet_8266_OLED .05 - ??????
+TODO:
+  - Weather Forecast
+  - Overlay - WiFi strength
+COMPLETED:
+  - 
+
+Mini_Pet_8266_OLED .04 - 2019-07-20
+  - WiFi AutoConnect hostname
+  - Fixing Travis-CI errors
+
+Mini_Pet_8266_OLED .03 - 2019-07-07
+  - Current Weather page
+  - Current Weather icon on Overlay
+
+Mini_Pet_8266_OLED .02 - 2019-07-05
+  - Animation of display screens
+  - NTP time
+  - Overlay
+
+Mini_Pet_8266_OLED .01 - 2019-07-05
+* Initial build
